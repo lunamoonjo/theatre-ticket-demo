@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Театральная афиша — продажа билетов</title>
+  <meta name="description" content="Демонстрационный интерфейс информационной системы продажи театральных билетов." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#poster" aria-label="На главную">
+        <span class="brand-mark">Т</span>
+        <span>
+          <strong>Театральная касса</strong>
+          <small>онлайн</small>
+        </span>
+      </a>
+      <nav class="nav" aria-label="Основная навигация">
+        <a href="#poster">Афиша</a>
+        <a href="#booking">Выбор мест</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="poster">
+      <div class="container hero-inner">
+        <div>
+          <p class="eyebrow">Информационная система продажи театральных билетов</p>
+          <h1>Афиша и расписание</h1>
+          <p class="hero-text">
+            Просматривайте репертуар, выбирайте удобный сеанс и переходите к выбору мест в зале.
+          </p>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card-title">Онлайн-покупка</div>
+          <div class="hero-card-value">Выбор места за несколько шагов</div>
+          <div class="hero-card-caption">Демонстрационная частичная реализация курсового проекта</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="catalog section">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">Репертуар</p>
+            <h2>Спектакли</h2>
+          </div>
+          <div class="filters">
+            <label class="search-box">
+              <span class="sr-only">Поиск спектакля</span>
+              <input id="searchInput" type="search" placeholder="Поиск спектакля..." autocomplete="off" />
+            </label>
+            <select id="genreFilter" aria-label="Фильтр по жанру">
+              <option value="all">Все жанры</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="performanceGrid" class="performance-grid"></div>
+        <p id="emptyState" class="empty-state hidden">По вашему запросу спектакли не найдены.</p>
+      </div>
+    </section>
+
+    <section class="schedule section section-muted">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">Расписание</p>
+            <h2 id="scheduleTitle">Выберите спектакль</h2>
+          </div>
+          <div class="schedule-hint">Нажмите «Выбрать места», чтобы перейти к покупке.</div>
+        </div>
+        <div id="scheduleList" class="schedule-list"></div>
+      </div>
+    </section>
+
+    <section class="booking section" id="booking">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">Оформление</p>
+            <h2>Выбор мест и оформление билета</h2>
+          </div>
+          <div class="booking-summary-top" id="bookingTitle">Сначала выберите сеанс</div>
+        </div>
+
+        <div class="booking-layout">
+          <div class="seat-panel card">
+            <div class="hall-meta" id="hallMeta">Сеанс не выбран</div>
+            <div class="stage">СЦЕНА</div>
+            <div class="legend">
+              <span><i class="legend-dot available"></i>Свободно</span>
+              <span><i class="legend-dot selected"></i>Выбрано</span>
+              <span><i class="legend-dot sold"></i>Продано</span>
+            </div>
+            <div id="seatMap" class="seat-map" aria-label="Схема зрительного зала"></div>
+          </div>
+
+          <aside class="checkout card">
+            <div class="checkout-block">
+              <span class="label">Выбранные места</span>
+              <div id="selectedSeatsText" class="selected-seats">Пока ничего не выбрано</div>
+            </div>
+
+            <div class="price-breakdown" id="priceBreakdown"></div>
+
+            <div class="total-row">
+              <span>Итого</span>
+              <strong id="totalPrice">0 ₽</strong>
+            </div>
+
+            <form id="ticketForm" class="ticket-form">
+              <div class="form-row">
+                <label>
+                  <span>ФИО</span>
+                  <input id="fullName" name="fullName" type="text" placeholder="Иванов Иван Иванович" required />
+                </label>
+              </div>
+              <div class="form-row two-cols">
+                <label>
+                  <span>Телефон</span>
+                  <input id="phone" name="phone" type="tel" placeholder="+7 900 000-00-00" required />
+                </label>
+                <label>
+                  <span>Электронная почта</span>
+                  <input id="email" name="email" type="email" placeholder="mail@example.ru" required />
+                </label>
+              </div>
+              <label class="agree">
+                <input id="agree" type="checkbox" required />
+                <span>Подтверждаю данные для оформления демонстрационного заказа.</span>
+              </label>
+              <button id="purchaseButton" class="primary-button" type="submit" disabled>Оплатить и оформить билет</button>
+            </form>
+
+            <div id="purchaseResult" class="purchase-result hidden" role="status"></div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
